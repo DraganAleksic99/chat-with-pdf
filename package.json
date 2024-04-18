@@ -6,17 +6,25 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "tsx -r dotenv/config ./scripts/seed.ts"
   },
   "dependencies": {
+    "@langchain/openai": "^0.0.28",
+    "@langchain/pinecone": "^0.0.4",
+    "@pinecone-database/pinecone": "^2.2.0",
+    "langchain": "^0.1.34",
     "next": "14.2.2",
+    "pdf-parse": "^1.1.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "tsx": "^4.7.2"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "dotenv": "^16.4.5",
     "eslint": "^8",
     "eslint-config-next": "14.2.2",
     "postcss": "^8",
