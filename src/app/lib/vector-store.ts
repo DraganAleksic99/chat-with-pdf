@@ -1,4 +1,4 @@
-import { getEnv } from '../../utils/env-utils';
+import { getEnv } from '../../../utils/env-utils';
 import { OpenAIEmbeddings } from '@langchain/openai';
 import { PineconeStore } from '@langchain/pinecone';
 import { Pinecone } from '@pinecone-database/pinecone';
