@@ -9,7 +9,7 @@ const formatContent = (text: string) =>
     </span>
   ));
 
-export function ChatLine({ role = 'assistant', content }: Message) {
+export function ChatLine({ role = 'assistant', content }: Partial<Message>) {
   if (!content) {
     return null;
   }
