@@ -22,10 +22,10 @@ const questionPrompt = PromptTemplate.fromTemplate(
 );
 
 const streamingModel = new ChatOpenAI({
-  modelName: 'gpt-3.5-turbo',
+  modelName: 'gpt-4-turbo',
   streaming: true,
   verbose: true,
-  temperature: 0
+  temperature: 0.2
 });
 
 export async function callChain({
