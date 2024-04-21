@@ -42,7 +42,6 @@ export async function callChain({
     const vectorStore = await getVectorStore(pc);
     const retriever = vectorStore?.asRetriever({ verbose: true });
 
-    // @ts-ignore
     const chain = RunnableSequence.from([
       {
         question: (input: { question: string; chatHistory?: string }) => input.question,
@@ -50,9 +49,10 @@ export async function callChain({
         context: async (input: { question: string; chatHistory?: string }) => {
           try {
             const relevantDocs = await retriever?.getRelevantDocuments(input.question);
-            // @ts-ignore
-            const serialized = formatDocumentsAsString(relevantDocs);
-            return serialized;
+            if (relevantDocs) {
+              const serialized = formatDocumentsAsString(relevantDocs);
+              return serialized;
+            }
           } catch (err) {
             console.log('An error occurred while attempting to retrieve documents', err);
           }
