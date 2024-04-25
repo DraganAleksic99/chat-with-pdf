@@ -3,7 +3,7 @@ import { StreamingTextResponse } from 'ai';
 import { getVectorStore } from './vector-store';
 import { PromptTemplate } from '@langchain/core/prompts';
 import { RunnableSequence } from '@langchain/core/runnables';
-import { StringOutputParser } from '@langchain/core/output_parsers';
+import { BytesOutputParser } from '@langchain/core/output_parsers';
 import { formatDocumentsAsString } from 'langchain/util/document';
 import { ChatOpenAI } from '@langchain/openai';
 
@@ -22,7 +22,9 @@ const questionPrompt = PromptTemplate.fromTemplate(
 );
 
 const streamingModel = new ChatOpenAI({
-  modelName: 'gpt-4-turbo',
+  // gpt-4 has much better performance but its too expensive for this demo app
+  // more than ten times more expensive than gpt-3.5
+  modelName: 'gpt-3.5-turbo-1106',
   streaming: true,
   verbose: true,
   temperature: 0.2
@@ -60,7 +62,7 @@ export async function callChain({
       },
       questionPrompt,
       streamingModel,
-      new StringOutputParser()
+      new BytesOutputParser()
     ]);
 
     const stream = await chain.stream({
