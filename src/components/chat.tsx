@@ -20,7 +20,7 @@ export function Chat() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [enterKeyPressed, setEnterKeyPressed] = useState(false);
 
-  const { messages, input, setInput, handleInputChange, handleSubmit, isLoading } = useChat({
+  const { messages, input, setInput, handleInputChange, handleSubmit, isLoading, stop } = useChat({
     initialMessages,
     onFinish() {
       setShowSuggestions(true);
@@ -65,6 +65,34 @@ export function Chat() {
             <PromptSuggestion key={s} handleClick={handleSuggestionClick} text={s} index={i} />
           ))}
       </div>
+
+      {isLoading && (
+        <Button
+          onClick={() => {
+            stop();
+            setShowSuggestions(true);
+          }}
+          className="px-2 pr-3 absolute left-1/2 -translate-x-1/2 top-3/4 -translate-y-full"
+        >
+          <span className="pr-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5.25 7.5A2.25 2.25 0 0 1 7.5 5.25h9a2.25 2.25 0 0 1 2.25 2.25v9a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-9Z"
+              />
+            </svg>
+          </span>
+          Stop Generating
+        </Button>
+      )}
 
       <form id="chat" onSubmit={handleSubmit} className="p-4 flex clear-both">
         <Input
