@@ -34,7 +34,13 @@ npm i
 cp .env.example .env
 ```
 
-### 4. Run app locally
+### 4. Seed database
+
+```
+npm run seed
+```
+
+### 5. Run app locally
 
 ```
 npm run dev
