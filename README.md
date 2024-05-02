@@ -5,8 +5,9 @@ Chat-with-pdf app uses RAG (Retrieval Augmented Generation) to retrieve relevant
 ## Stack
 
 - Framework: [Next.js](https://nextjs.org/)
-- Chat functionality: [Vercel AI SDK](https://sdk.vercel.ai/docs)
-- Generative Model: [OpenAI](https://openai.com/)
+- Chat functionality: [Vercel AI SDK](https://sdk.vercel.ai/docs/introduction)
+- Generative model: [OpenAI](https://openai.com/)
+- Vector database: [Pinecone](https://docs.pinecone.io/home)
 - Component library: [shadcn/ui](https://ui.shadcn.com/)
 - Styling: [Tailwind CSS](https://tailwindcss.com/)
 
