@@ -20,7 +20,16 @@ export function Chat() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [enterKeyPressed, setEnterKeyPressed] = useState(false);
 
-  const { messages, input, setInput, handleInputChange, handleSubmit, isLoading, stop } = useChat({
+  const {
+    messages,
+    setMessages,
+    input,
+    setInput,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    stop
+  } = useChat({
     initialMessages,
     onFinish() {
       setShowSuggestions(true);
@@ -41,7 +50,7 @@ export function Chat() {
     });
   }, []);
 
-  function handleSuggestionClick(text: string, index: number) {
+  const handleSuggestionClick = (text: string, index: number) => {
     if (enterKeyPressed) {
       setTimeout(() => setShowSuggestions(false), 0);
       return;
@@ -52,13 +61,17 @@ export function Chat() {
       const newSuggestions = suggestions.filter((_s, i) => i !== index);
       setSuggestions(newSuggestions);
     }, 0);
-  }
+  };
+
+  const handleDelete = (id: string) => {
+    setMessages(messages.filter(m => m.id !== id));
+  };
 
   return (
     <div className="rounded-2xl border h-[75vh] flex flex-col justify-between">
       <div className="p-6 overflow-auto" ref={containerRef}>
         {messages.map(({ id, role, content }: Message) => (
-          <ChatLine key={id} role={role} content={content} />
+          <ChatLine key={id} id={id} role={role} content={content} handleDelete={handleDelete} />
         ))}
         {(messages.length === 1 || showSuggestions) &&
           suggestions.map((s: string, i: number) => (
