@@ -17,7 +17,7 @@ export function Chat() {
   ]);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const [enterKeyPressed, setEnterKeyPressed] = useState(false);
 
   const {
@@ -73,7 +73,7 @@ export function Chat() {
         {messages.map(({ id, role, content }: Message) => (
           <ChatLine key={id} id={id} role={role} content={content} handleDelete={handleDelete} />
         ))}
-        {(messages.length === 1 || showSuggestions) &&
+        {showSuggestions &&
           suggestions.map((s: string, i: number) => (
             <PromptSuggestion key={s} handleClick={handleSuggestionClick} text={s} index={i} />
           ))}
