@@ -22,7 +22,7 @@ export function ChatLine({ id = '', role = 'assistant', content, handleDelete }:
   return (
     <div>
       <Card className="mb-2">
-        <CardHeader>
+        <CardHeader className="pb-3">
           <CardTitle
             className={cn(
               `${
@@ -30,16 +30,16 @@ export function ChatLine({ id = '', role = 'assistant', content, handleDelete }:
                   ? 'text-blue-500 dark:text-blue-200'
                   : 'text-amber-500 dark:text-amber-200'
               }`,
-              'flex justify-between'
+              'flex justify-between items-center'
             )}
           >
             <span>{role === 'assistant' ? 'AI' : 'You'}</span>
-            <Button className="bg-white" onClick={() => handleDelete(id)}>
+            <Button className="bg-white px-3" onClick={() => handleDelete(id)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#fff"
                 viewBox="0 0 24 24"
-                strokeWidth={1.5}
+                strokeWidth={1}
                 stroke="#000"
                 className="w-6 h-6"
               >
