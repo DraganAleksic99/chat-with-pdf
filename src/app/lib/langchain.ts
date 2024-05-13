@@ -22,9 +22,7 @@ const questionPrompt = PromptTemplate.fromTemplate(
 );
 
 const streamingModel = new ChatOpenAI({
-  // gpt-4 has much better performance but its too expensive for this demo app
-  // more than ten times more expensive than gpt-3.5
-  modelName: 'gpt-3.5-turbo-1106',
+  modelName: 'gpt-4o',
   streaming: true,
   verbose: true,
   temperature: 0.2
