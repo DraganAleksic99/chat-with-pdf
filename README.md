@@ -1,6 +1,6 @@
 # Chat-With-Pdf
 
-Chat-with-pdf app uses RAG (Retrieval Augmented Generation) to retrieve relevant context, then answers user question based on the provided context and chat history.
+Chat with a pdf document! Utilizes RAG (Retrieval Augmented Generation) to retrieve relevant context, then answers user question based on the provided context and chat history.
 
 ## Stack
 
