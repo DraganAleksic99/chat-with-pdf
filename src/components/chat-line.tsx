@@ -22,7 +22,7 @@ export function ChatLine({ id = '', role = 'assistant', content, handleDelete }:
   return (
     <div>
       <Card className="mb-2">
-        <CardHeader className="pb-3">
+        <CardHeader className="pb-2 pt-3 px-4 sm:px-6">
           <CardTitle
             className={cn(
               `${
@@ -34,14 +34,14 @@ export function ChatLine({ id = '', role = 'assistant', content, handleDelete }:
             )}
           >
             <span>{role === 'assistant' ? 'AI' : 'You'}</span>
-            <Button className="bg-white px-3" onClick={() => handleDelete(id)}>
+            <Button className="bg-white px-2" onClick={() => handleDelete(id)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#fff"
                 viewBox="0 0 24 24"
                 strokeWidth={1}
                 stroke="#000"
-                className="w-6 h-6"
+                className="w-5 h-5"
               >
                 <path
                   strokeLinecap="round"
@@ -52,7 +52,7 @@ export function ChatLine({ id = '', role = 'assistant', content, handleDelete }:
             </Button>
           </CardTitle>
         </CardHeader>
-        <CardContent>{formattedMessage}</CardContent>
+        <CardContent className="pb-4 px-4 sm:px-6">{formattedMessage}</CardContent>
       </Card>
     </div>
   );
