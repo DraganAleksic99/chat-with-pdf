@@ -1,7 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Message } from 'ai/react';
-import { cn } from '@/lib/utils';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from './ui/button';
+import { cn } from '@/lib/utils';
+import { useAnimatedText } from '@/app/lib/hooks';
 
 const formatContent = (text: string) =>
   text.split('\n').map((line, i) => (
@@ -13,16 +14,18 @@ const formatContent = (text: string) =>
 
 type Props = Partial<Message> & { handleDelete: (id: string) => void };
 
-export function ChatLine({ id = '', role = 'assistant', content, handleDelete }: Props) {
+export function ChatLine({ id = '', role = 'assistant', content = '', handleDelete }: Props) {
+  const animatedText = useAnimatedText(content);
+  const formattedContent = formatContent(animatedText);
+
   if (!content) {
     return null;
   }
-  const formattedMessage = formatContent(content);
 
   return (
     <div>
       <Card className="mb-2">
-        <CardHeader className="pb-2 pt-3 px-4 sm:px-6">
+        <CardHeader className="pb-1 pt-3 px-4 sm:px-6">
           <CardTitle
             className={cn(
               `${
@@ -34,7 +37,7 @@ export function ChatLine({ id = '', role = 'assistant', content, handleDelete }:
             )}
           >
             <span>{role === 'assistant' ? 'AI' : 'You'}</span>
-            <Button className="bg-white px-2" onClick={() => handleDelete(id)}>
+            <Button className="bg-white p-1 px-2" onClick={() => handleDelete(id)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#fff"
@@ -52,7 +55,9 @@ export function ChatLine({ id = '', role = 'assistant', content, handleDelete }:
             </Button>
           </CardTitle>
         </CardHeader>
-        <CardContent className="pb-4 px-4 sm:px-6">{formattedMessage}</CardContent>
+        <CardContent className="pb-4 px-4 sm:px-6">
+          {role === 'assistant' ? formattedContent : content}
+        </CardContent>
       </Card>
     </div>
   );

@@ -8,9 +8,13 @@ import { formatDocumentsAsString } from 'langchain/util/document';
 import { ChatOpenAI } from '@langchain/openai';
 
 const questionPrompt = PromptTemplate.fromTemplate(
-  `You are an enthusiastic AI assistant. Use the following pieces of context to answer the question at the end to someone that does not have techical knowledge about machine learning. When you come across a machine learning term, explain it briefly.
+  `You are an enthusiastic AI assistant. Use the following pieces of context to answer 
+  the question at the end to someone that does not have techical knowledge about machine learning.
+  When you come across a machine learning term, explain it briefly.
   If you don't know the answer, say that you don't know. Respond with ten sentences.
-  Use the exact wording as the context.
+  Use the exact wording as the context. Include "\n" character in the response after 
+  every third sentence so the response is readable.
+
   ----------
   CONTEXT: {context}
   ----------
@@ -22,7 +26,7 @@ const questionPrompt = PromptTemplate.fromTemplate(
 );
 
 const streamingModel = new ChatOpenAI({
-  modelName: 'gpt-4o',
+  modelName: 'gpt-4o-2024-11-20',
   streaming: true,
   verbose: true,
   temperature: 0.2

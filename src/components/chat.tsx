@@ -1,18 +1,19 @@
 'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { useChat, Message } from 'ai/react';
 import { scrollToBottom, initialMessages } from '@/lib/utils';
 import { ChatLine } from './chat-line';
 import { PromptSuggestion } from './prompt-suggestion';
-import { useChat, Message } from 'ai/react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Spinner } from './ui/spinner';
-import { useEffect, useRef, useState } from 'react';
 
 export function Chat() {
   const [suggestions, setSuggestions] = useState([
     'Who authored this paper?',
     'What is this paper about?',
-    'Explain transformer architecture',
+    'Explain transformer architecture.',
     'What is attention mechanism?'
   ]);
 
@@ -43,11 +44,21 @@ export function Chat() {
   }, [messages]);
 
   useEffect(() => {
-    document.getElementById('chat')?.addEventListener('keypress', e => {
-      if (e.key === 'Enter') {
-        setEnterKeyPressed(true);
+    const controller = new AbortController();
+
+    document.getElementById('chat')?.addEventListener(
+      'keypress',
+      e => {
+        if (e.key === 'Enter') {
+          setEnterKeyPressed(true);
+        }
+      },
+      {
+        signal: controller.signal
       }
-    });
+    );
+
+    return () => controller.abort();
   }, []);
 
   const handleSuggestionClick = (text: string, index: number) => {
@@ -55,6 +66,7 @@ export function Chat() {
       setTimeout(() => setShowSuggestions(false), 0);
       return;
     }
+
     setInput(text);
     setTimeout(() => {
       setShowSuggestions(false);
@@ -69,7 +81,7 @@ export function Chat() {
 
   return (
     <div className="rounded-2xl border h-[85vh] flex flex-col justify-between">
-      <div className="p-4 sm:p-6 overflow-auto" ref={containerRef}>
+      <div className="p-4 pb-8 sm:pb-8 sm:p-6 overflow-auto" ref={containerRef}>
         {messages.map(({ id, role, content }: Message) => (
           <ChatLine key={id} id={id} role={role} content={content} handleDelete={handleDelete} />
         ))}
