@@ -85,7 +85,7 @@ export function Chat() {
             stop();
             setShowSuggestions(true);
           }}
-          className="px-2 pr-3 absolute left-1/2 -translate-x-1/2 top-3/4 -translate-y-full"
+          className="px-2 pr-3 absolute left-1/2 -translate-x-1/2 bottom-16 -translate-y-full"
         >
           <span className="pr-1">
             <svg
